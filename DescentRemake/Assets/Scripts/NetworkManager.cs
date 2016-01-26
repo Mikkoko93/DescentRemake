@@ -12,6 +12,7 @@ public class NetworkManager : MonoBehaviour {
     List<string> chatMessages;
     int maxChatMessages = 10;
 
+
 	void Start () {
 		 spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
          PhotonNetwork.player.name = PlayerPrefs.GetString("Username", "Awesome player");
@@ -26,9 +27,15 @@ public class NetworkManager : MonoBehaviour {
         props["asddsaddsa"] = 2;
         PhotonNetwork.player.SetCustomProperties(props);*/
     }
+    public void AddChatMessage(string m){
+        
+        GetComponent<PhotonView>().RPC("AddChatMessage_PunRPC", PhotonTargets.AllBuffered, m);
 
-    public void AddChatMessage(string m)
-    {
+        
+    }
+    
+    [PunRPC]
+    void AddChatMessage_PunRPC(string m){
         if (chatMessages.Count >= maxChatMessages)
         {
             chatMessages.RemoveAt(0);
@@ -119,7 +126,7 @@ public class NetworkManager : MonoBehaviour {
 		PhotonNetwork.Instantiate ("Player", mySpawnSpot.transform.position, transform.rotation, 0);
 		//came.enabled = false;
 		myPlayerGO.GetComponent<NetworkCharacter> ().enabled = true;
-		//myPlayerGO.GetComponent<PlayerControl> ().enabled = true;
+		myPlayerGO.GetComponent<ChatManager> ().enabled = true;
 		//myPlayerGO.GetComponentInChildren<PlayerShooting> ().enabled = true;
 		//myPlayerGO.GetComponentInChildren<PlayerHealth> ().enabled = true;
 
