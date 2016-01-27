@@ -18,7 +18,7 @@ Platform assembly: C:\temp\Peliohjelmointi\DescentRemake\Builds\FirstMPBuild_Dat
 Loading C:\temp\Peliohjelmointi\DescentRemake\Builds\FirstMPBuild_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\temp\Peliohjelmointi\DescentRemake\Builds\FirstMPBuild_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\temp\Peliohjelmointi\DescentRemake\Builds\FirstMPBuild_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.127 seconds
+- Completed reload, in  0.144 seconds
 Platform assembly: C:\temp\Peliohjelmointi\DescentRemake\Builds\FirstMPBuild_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\temp\Peliohjelmointi\DescentRemake\Builds\FirstMPBuild_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1200 59Hz; virtual: 1920x1200 at 0,0
@@ -26,9 +26,9 @@ desktop: 1920x1200 59Hz; virtual: 1920x1200 at 0,0
 XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.022136 ms
+UnloadTime: 0.827141 ms
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 18b0 -> priority: 1 
+  Thread -> id: 1ac8 -> priority: 1 
 OnJoinedLobby
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
@@ -42,6 +42,34 @@ OnPhotonRandomJoinFailed
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
 
 OnJoinedRoom
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+Connecting to nameserver ns.exitgames.com:5058
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+Mäni Läpi
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+Establishing Encryption
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+OperationResponse 230: ReturnCode: 0 (). Parameters: {(Byte)230=(String)chat-eu.exitgames.com:5057, (Byte)221=(String)T4cKMiafRLfyzEGk+3YjiTfpJTrtBdF8/ZTzBmKq0unGl2w9OcAlf746SNM8rNfKirkZ8kdfDZa8au1uHXmwkes5VMJyyHdag551Tko6nx9iZ/KdnHAQpd5hoc+VutcUpeX4MONbzQKnnLBqxcHYUHiTzkII8JNuAL9GeyP3xz0=, (Byte)225=(String)MikkoClient} on: ns.exitgames.com:5058
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+Connecting to frontend chat-eu.exitgames.com:5057
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+Establishing Encryption
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+OperationResponse 230: ReturnCode: 0 (). Parameters: {} on: ns.exitgames.com:5058
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
 
