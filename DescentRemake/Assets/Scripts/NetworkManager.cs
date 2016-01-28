@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class NetworkManager : MonoBehaviour {
 
@@ -12,20 +14,32 @@ public class NetworkManager : MonoBehaviour {
     List<string> chatMessages;
     int maxChatMessages = 10;
 
+    private Text NameText;
+    private InputField NameInput;
+    private Button ConnectMP;
 
+    public void ConnectMPButton()
+    {
+        Connect();
+
+    }
 	void Start () {
 		 spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
          PhotonNetwork.player.name = PlayerPrefs.GetString("Username", "Awesome player");
          chatMessages = new List<string>();
+
+         NameText = GameObject.Find("NameText").GetComponent<Text>();
+         NameInput = GameObject.Find("NameInput").GetComponent<InputField>();
+         ConnectMP = GameObject.Find("ConnectMP").GetComponent<Button>();
+
+
 
 	}
 
     void OnDestroy()
     {
         PlayerPrefs.SetString("Username", PhotonNetwork.player.name);
-       /* Hashtable props = new Hashtable();
-        props["asddsaddsa"] = 2;
-        PhotonNetwork.player.SetCustomProperties(props);*/
+
     }
     public void AddChatMessage(string m){
         
@@ -46,7 +60,15 @@ public class NetworkManager : MonoBehaviour {
 	void Connect(){
 		//PhotonNetwork.offlineMode = true;
 		PhotonNetwork.ConnectUsingSettings ("DescentRemake");
-        
+
+        NameInput.enabled = false;
+        NameInput.GetComponent<CanvasGroup>().alpha = 0;
+
+        NameText.enabled = false;
+        NameText.GetComponent<CanvasGroup>().alpha = 0;
+
+        ConnectMP.enabled = false;
+        ConnectMP.GetComponent<CanvasGroup>().alpha = 0;
 
 	}
 	void Update(){
@@ -62,41 +84,35 @@ public class NetworkManager : MonoBehaviour {
 	void OnGUI(){
 		GUILayout.Label (PhotonNetwork.connectionStateDetailed.ToString ());
 
-        if (PhotonNetwork.connected == false && connecting == false )
+        if (PhotonNetwork.connected == false && connecting == false)
         {
-            GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.BeginVertical();
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Username: ");
-            PhotonNetwork.player.name = GUILayout.TextField(PhotonNetwork.player.name);
-            GUILayout.EndHorizontal();
-            if (GUILayout.Button("Multiplayer"))
-            {
-                Connect();
+            PhotonNetwork.player.name = NameInput.text;
+            if (NameInput.text.Length > 0){            
+                ConnectMP.enabled = true;
+                
+                
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    ConnectMPButton();
+                }
+
             }
-            GUILayout.FlexibleSpace();
-            GUILayout.EndVertical();
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-            GUILayout.EndArea();
+            else
+                ConnectMP.enabled = false;
+            
+            
+
         }
 
-        if (PhotonNetwork.connected == true && connecting == false)
+        if (NameInput.enabled)
         {
-            GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
-            GUILayout.BeginVertical();
-            GUILayout.FlexibleSpace();
-
-            foreach(string msg in chatMessages){
-                GUILayout.Label(msg);
-            }
-
-            GUILayout.EndVertical();
-            GUILayout.EndArea();
+            NameInput.Select();
+            NameInput.ActivateInputField();
         }
+
+
+
 	}
 	void OnJoinedLobby(){
 		Debug.Log ("OnJoinedLobby");
@@ -116,6 +132,7 @@ public class NetworkManager : MonoBehaviour {
 
 	void SpawnMyPlayer(){
         AddChatMessage("Spawning player: " + PhotonNetwork.player.name);
+
         
 		if (spawnSpots == null) {
 			Debug.LogError ("Broken");
@@ -135,5 +152,7 @@ public class NetworkManager : MonoBehaviour {
 
 	
 	}
+
+
 
 }
