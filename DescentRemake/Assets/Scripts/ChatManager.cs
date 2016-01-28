@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon.Chat;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class ChatManager : MonoBehaviour, IChatClientListener
 {
@@ -18,7 +17,7 @@ public class ChatManager : MonoBehaviour, IChatClientListener
     private ChatClient _chat;
     private string username = "";
     private string _chatText = "";
-    //private string _privateText = "";
+    private string _privateText = "";
     private string _input = "";
 
     private bool _connected;
@@ -42,17 +41,13 @@ public class ChatManager : MonoBehaviour, IChatClientListener
     // Use this for initialization
     void Start()
     {
-
-
         ChatText = GameObject.Find("ChatText").GetComponent<Text>();
         ChatInput = GameObject.Find("ChatInput").GetComponent<InputField>();
         DontDestroyOnLoad(gameObject);
         Application.runInBackground = true;
 
         _chat = new ChatClient(this);
-
-
-
+        
 
     }
 
@@ -63,35 +58,46 @@ public class ChatManager : MonoBehaviour, IChatClientListener
             _chat.Service();
 
         _chat.Service();
+    }
+
+    void OnGUI()
+    {
 
         if (!_connected)
         {
             Connect();
 
+           /* username = GUI.TextField(new Rect(10, 10, 200, 20), username);
+            if (GUI.Button(new Rect(10, 35, 80, 20), "Enter"))
+            {
 
+                if (!string.IsNullOrEmpty(username) && username.Length > 0)
+                {
+                    Connect();
+                    Debug.Log("Connecting");
+
+                }
+            }*/
         }
         else
         {
 
             ChatText.text = _chatText;
-
+            //GUI.TextArea(new Rect(10, 10, 200, 200), _chatText);
             _input = ChatInput.text;
-
-
+            //_input = GUI.TextField(new Rect(10, 215, 100, 20), _input);
+            
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 if (ChatInput.enabled)
                 {
-
                     if (!string.IsNullOrEmpty(_input) && _input.Length > 0)
                     {
                         SendMessage(_input);
                     }
-
                     ChatInput.text = "";
                     ChatInput.enabled = false;
                     ChatInput.GetComponent<CanvasGroup>().alpha = 0;
-
                 }
                 else
                 {
@@ -101,17 +107,6 @@ public class ChatManager : MonoBehaviour, IChatClientListener
             }
 
 
-        }
-
-        
-    }
-
-    void OnGUI()
-    {
-        if (ChatInput.enabled)
-        {
-            ChatInput.Select();
-            ChatInput.ActivateInputField();
         }
     }
 
@@ -197,7 +192,7 @@ public class ChatManager : MonoBehaviour, IChatClientListener
         {
             for (int i = 0; i < senders.Length; i++)
             {
-                _chatText = senders[i] + ": " + messages[i] + "\r\n" + _chatText;
+                _chatText = senders[i] + ":" + messages[i] + "\r\n" + _chatText;
             }
         }
     }
